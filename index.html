@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Live HTML Editor</title>
+  </head>
+  <body class="bg-slate-900 text-white">
+    <div class="flex flex-col lg:h-screen justify-center items-center">
+      <div class="flex flex-col items-center justify-center gap-10 my-10">
+        <h1 class="text-4xl font-bold">Live HTML Editor</h1>
+        <div class="flex flex-col gap-4 lg:flex-row">
+          <div class="flex flex-col gap-2">
+            <h2 class="text-xl font-bold">HTML</h2>
+            <textarea
+              class="bg-white border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent drop-shadow-md rounded-md p-2 h-96 w-96 resize-none text-black"
+              id="html"
+              placeholder="write your html here"
+            ></textarea>
+            <button
+              class="bg-white hover:bg-blue-500 text-blue-500 font-bold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+              id="save"
+            >
+              Save
+            </button>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h2 class="text-xl font-bold">Preview</h2>
+            <iframe
+              id="result"
+              class="bg-white border border-blue-500 rounded-md drop-shadow-md h-96 w-96 p-2 overflow-auto"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // get the elements
+    const html = document.getElementById("html");
+    const result = document.getElementById("result");
+
+    // html value to result iframe on load
+    html.addEventListener("keyup", () => {
+      //open the iframe document
+      result.contentWindow.document.open();
+      //write the html value to the iframe document
+      result.contentWindow.document.write(html.value);
+      //close the iframe document
+      result.contentWindow.document.close();
+    });
+
+    // save html value to local system
+    document.getElementById("save").addEventListener("click", () => {
+      const data = html.value;
+      // create a blob object with the data as content and html as type
+      const blob = new Blob([data], { type: "text/plain" });
+      // create a url for the blob object
+      const url = URL.createObjectURL(blob);
+      // create a link element
+      const a = document.createElement("a");
+      // set the download attribute of the link to the filename
+      a.download = "index.html";
+      // set the href of the link to the url
+      a.href = url;
+      // click the link to trigger the download
+      a.click();
+    });
+  </script>
+</html>

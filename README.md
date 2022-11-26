@@ -4,7 +4,7 @@ Live HTML Editor is a simple HTML editor that allows you to write HTML code and 
 
 ## Demo
 
-### https://github.com/sauravhathi/live-html-editor
+### https://sauravhathi.github.io/live-html-editor/
 
 ![image](https://user-images.githubusercontent.com/61316762/204096591-2043d182-10e3-4ad1-adec-34af6ed29ee9.png)
 
